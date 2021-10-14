@@ -1,0 +1,27 @@
+<div class="container text-center my-3">
+    <div class="jumbotron" style="background-color: green;color: white;">
+        <h1>USER OK LOGIN!</h1>
+        <h2><i>Bienvenido {{nombre}}</i></h2>
+        <br>
+         <img src="{{foto}}" width="100" alt=""><br>
+        <br>
+
+        <button class="btn btn-danger my-5" onclick="logout()">LOGOUT</button>
+         <button class="btn btn-danger my-5" onclick="protected()">Continuar</button>
+    </div>
+</div>
+
+<script>
+    function redireccionar(pagina) {
+        location.href = pagina;
+    } 
+
+    function protected(){
+     redireccionar('/protected')
+    }
+
+    function logout() {
+        console.log('logout');
+        redireccionar('/logout')
+    }
+</script>
