@@ -8,7 +8,30 @@ import session from 'express-session'
 import passport from './utils/passport.util.js'
 import './db.js'
 import UserRouter from './routers/auth.route.js'
+import minimist from 'minimist'
+import * as ApiRouter from './routers/api.route.js'
 
+// const options = {
+//   default : {
+//     PORT : 8080
+//   }
+// }
+
+//const arg = minimist(process.argv.splice(2), options)
+
+
+
+// import minimist from 'minimist'
+
+// const options = {
+//   default : {
+//     PORT : 8080
+//   }
+// }
+// const arg = minimist(process.argv.splice(2), options)
+// console.log(arg)
+
+// const puerto = arg.PORT
 
 dotenv.config()
 const app = express()
@@ -28,12 +51,23 @@ app.use(session({
   saveUninitialized:true
 }))
 
+
+
+
+
 app.use(passport.initialize())
 app.use(passport.session())
+
+
+
+
+
 app.use('/',UserRouter)
+app.use('/api',ApiRouter.apiRoute)
 
 
 
-const PORT = process.env.PORT || 8080
-const server = app.listen(PORT, () => console.log(emoji.get('fire'),`Server started on port http://localhost:${PORT}`))
+
+const server = app.listen(ApiRouter.puerto, () => console.log(emoji.get('fire'),`Server started on port http://localhost:${ApiRouter.puerto}`))
 server.on('error', (err) => console.log(err))
+
