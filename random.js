@@ -1,7 +1,8 @@
 process.send('listo')
 
 process.on("message", (cant) => {
-    const resultado = RandomNumber(cant.number)
+  console.log(cant)
+    const resultado = RandomNumber(cant)
     process.send(resultado)
 })
 
