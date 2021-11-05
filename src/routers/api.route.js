@@ -1,21 +1,7 @@
 import { Router } from "express";
-// import {fork} from "child_process"
 import {fork} from "child_process"
-import minimist from 'minimist'
-
+import {nCpus} from '../config.js'
 const apiRoute = Router()
-
-const options = {
-  default : {
-    PORT : 8080
-  }
-}
-
-const argumentos = process.argv.splice(2)
-const arg = minimist(argumentos, options)
-const puerto = arg.PORT
-
-
 
 apiRoute.get('/randoms', (req,res) => {
   let { cant } = req.query
@@ -35,18 +21,18 @@ apiRoute.get('/randoms', (req,res) => {
 
 
 apiRoute.get('/info',(req,res) => {
-  console.log(arg)
   res.status(200).json({
-    ArgumentosEntrada : arg,
     SistOperativo : process.platform,
     NodeVersion : process.version,
     MemoriaRSS : process.memoryUsage().rss,
     ProcesoID : process.pid,
-    CarpetaProyecto : process.cwd()
+    CarpetaProyecto : process.cwd(),
+    NumeroDeProcesadores : nCpus,
+    PID : process.pid
 
   })
 })
 
 
 
-export {apiRoute , puerto}
+export {apiRoute}

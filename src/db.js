@@ -15,5 +15,5 @@ mongoose.connect(
 mongoose.connection.once('open', () => { console.log(emoji.get('fire'), 'Conectado a la base de datos') })
 mongoose.connection.on('error', (err) => { console.log(err) })
 
-export default mongoose.connection
+ export default mongoose.connection
 
